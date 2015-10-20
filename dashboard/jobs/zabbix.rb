@@ -20,9 +20,9 @@ require 'active_support/core_ext/numeric/time'
 SCHEDULER.every '10s' do
 
   serv = Zabby.init do
-    set :server => "http://example.zabbix.com/zabbix"
-    set :user => "username"
-    set :password => "password"
+    set :server => ENV['ZABBIX_HTTP'] || "http://localhost/zabbix"
+    set :user => ENV['ZABBIX_USERNAME'] || "username"
+    set :password => ENV['ZABBIX_PASSWORD'] || "password"
     login
   end
 
