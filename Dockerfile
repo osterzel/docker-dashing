@@ -12,12 +12,12 @@ RUN apt-get install -y build-essential ruby1.9.1-dev nodejs
 RUN gem install dashing bundle --no-ri --no-rdoc
 
 #Copy dashboard
-#RUN mkdir /dashboard
-COPY dashboard /
+RUN mkdir /dashboard
+COPY dashboard /dashboard
 
 #Install additional gems
 WORKDIR /dashboard
 RUN pwd && bundle install --path vendor/bundle 
 
 # Default command that autostarts the dashing project
-CMD ["bundle exec dashing start"]
+CMD bundle exec dashing start
