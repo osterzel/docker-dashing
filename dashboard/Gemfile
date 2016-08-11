@@ -5,3 +5,4 @@ gem 'dashing'
 ## Remove this if you don't need a twitter widget.
 gem 'zabby'
 gem 'activesupport'
+gem 'jira-ruby'
