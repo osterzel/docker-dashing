@@ -41,9 +41,11 @@ else
 
       culprits = jobStatus['culprits']
 
-      culpritName = getNameFromCulprits(culprits)
-      if culpritName != ''
-         culpritName = culpritName.partition('<').first
+      if ! culprits.blank?
+        culpritName = getNameFromCulprits(culprits)
+        if culpritName != ''
+           culpritName = culpritName.partition('<').first
+        end
       end
 
       failedJobs.push({ label: job['name'], value: culpritName})
@@ -56,10 +58,9 @@ else
 
   def getFromJenkins(path)
 
-    puts path
     uri = URI.parse(path)
     response = nil
-    Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+    Net::HTTP.start(uri.host, uri.port, :verify_mode => OpenSSL::SSL::VERIFY_NONE, :use_ssl => uri.scheme == 'https') do |http|
        request = Net::HTTP::Get.new uri.request_uri
        if JENKINS_AUTH['name']
          request.basic_auth(JENKINS_AUTH['name'], JENKINS_AUTH['password'])
