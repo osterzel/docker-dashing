@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: build-radiator 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: build-radiator 
+    spec:
+      containers:
+      - name: build-radiator 
+        image: ${CONTAINER_NAME} 
+        ports:
+        - containerPort: 3030 
